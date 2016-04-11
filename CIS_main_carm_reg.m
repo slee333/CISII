@@ -22,20 +22,10 @@ tre2 = norm(tm2_calc - t_trackerpos(2,:)');
 tre = mean([tre1 tre2]);
 fprintf('The TRE of C-arm Registration is %f.\n', tre);
 
+%% Find Center of Rotation of C-arm (assuming it is a perfect circle)
+SourcePos = zeros(3,size(P,3));
+for i = 1:size(P,3)
+    SourcePos(:,i) = -P(1:3,1:3,i)\P(:,4,i);
+end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[cor, rad] = CIS_CircleFitTaubin3D(SourcePos);
