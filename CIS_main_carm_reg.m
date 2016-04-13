@@ -29,10 +29,8 @@ end
 [cor, rad] = CIS_CircleFitTaubin3D(SourcePos);
 
 %% Create output 4x4 transformation matrices
-
-AffineTransform_double_3_3 = reshape([c2opt.R, c2opt.p],12,1);
 fixed = [0;0;0];
 savename = input('Type in a name for C-arm transformation: ','s');
 savename2 = input('Type in a name for Center of rotation / radius: ','s');
-save(savename, 'AffineTransform_double_3_3', 'fixed')
-save(savename2, 'cor', 'rad','-ascii')
+CIS_save_slicerTF([c2opt.R, c2opt.p; 0 0 0 1], fixed, savename);
+CIS_save_slicerTF([[eye(3)*rad], cor; 0 0 0 1], fixed, savename2);
