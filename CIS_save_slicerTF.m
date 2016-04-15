@@ -2,7 +2,7 @@ function [] = CIS_save_slicerTF(TFmat, fixed, name)
 %CIS_SAVE_SLICERTF saves transform for a slicer. var name must be in
 %string
 %   Detailed explanation goes here
-
+TFmat = inv(diag([-1 -1 1 1]))*TFmat*inv(diag([-1 -1 1 1]));
 TF = reshape(TFmat(1:3,:),12,1);
 
 output = fopen([name,'.txt'], 'wt');
